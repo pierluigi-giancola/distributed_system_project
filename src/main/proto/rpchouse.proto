@@ -1,0 +1,60 @@
+syntax="proto3";
+
+import "house.proto";
+
+package proto.rpc;
+
+option java_outer_classname = "GrpcHouseProto";
+
+
+service House {
+
+    rpc UpdatePredecessor(HouseInfoMessageProto) returns (HouseMeasurementInfoMessageProto) {}
+
+    rpc UpdateSuccessor(HouseInfoMessageProto) returns (MeasurementInfoListMessageProto) {}
+
+    rpc Bye(stream HouseInfoMessageProto) returns (MessageProto) {}
+
+    rpc UpdateMeasurement(MeasurementInfoMessageProto) returns (MessageProto) {}
+
+}
+
+
+
+/*
+service Boost {
+    rpc RequestBoost (MessageProto) returns (MessageProto) {}
+}
+*/
+
+message MessageProto {
+    int32 type=1;
+    int32 control=2;
+    int64 timestamp=3;
+    string id=4;
+    repeated string boostToken=5;
+    string meanToken=6;
+}
+
+message HouseInfoMessageProto {
+    MessageProto message = 1;
+    HouseInfoProto houseInfo=2;
+}
+
+message MeasurementInfoMessageProto {
+    MessageProto message = 1;
+    MeasurementInfoProto measurementInfo=2;
+}
+
+message MeasurementInfoListMessageProto {
+    MessageProto message = 1;
+    double lastConsumption = 2;
+    repeated MeasurementInfoProto measurement = 3;
+}
+
+message HouseMeasurementInfoMessageProto {
+    MessageProto message = 1;
+    double lastConsumption = 2;
+    HouseInfoProto houseInfo = 3;
+    repeated MeasurementInfoProto measurement = 4;
+}

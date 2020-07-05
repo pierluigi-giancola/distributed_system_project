@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package proto;
+
+option java_outer_classname = "HouseProtoMessage";
+
+
+message HouseInfoProto {
+    string id = 1;
+    string ip = 2;
+    int32 port = 3;
+}
+
+message HouseInfoListProto {
+    repeated HouseInfoProto house = 1;
+}
+
+message MeasurementInfoProto {
+    string id = 1;
+    double value = 2;
+    int64  timestamp = 3;
+}
+
+message MeasurementInfoListProto {
+    repeated MeasurementInfoProto measurementInfo = 1;
+}
